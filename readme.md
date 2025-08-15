@@ -57,7 +57,7 @@ Dê uma passeada pelo projeto e note que ele tem alguns probleminhas de arquitet
 ## Seu trabalho
 Certo, tudo configurado e rodando. Agora vamos explicar o que você precisa fazer.
 
-### Parte1Controller
+### Parte1 Controller
 Esse controller foi criado para gerar uma API que sempre retorna um número aleatório. 
 Você pode vê-lo funcionando ao rodar o projeto e na página do Swagger, clique em Parte 1 > Try it Out > Execute.
 
@@ -66,7 +66,7 @@ Seu trabalho, portanto, é corrigir esse comportamente: cada vez que a chamada �
 
 Outro problema a ser corrigido: o número salvo no banco deve ser único. Muitas vezes uma exception é gerada quando se tenta salvar o mesmo número mais de uma vez. Faça também a correção desse problema.
 
-### Parte2Controller
+### Parte2 Controller
 Essa API deveria retornar os produtos cadastrados de forma paginada. O usuário informa a página (page) desejada e o sistema retorna os 10 itens da mesma.
 O problema é que não importa qual número de página é utilizado: os resultados estão vindo sempre os mesmos. E não apenas os 10.
 
@@ -76,7 +76,7 @@ Você precisa portanto:
 3. Agora, explore os arquivos ```/Models/CustomerList``` e ```/Models/ProductList```. Eles são bem parecidos. De fato, deve haver uma forma melhor de criar esses objetos, com menos repetição de código. Faça essa alteração.
 4. Da mesma forma, como você melhoraria o ```CustomerService```e o ```ProductService``` para evitar repetição de código?
 
-### Parte3Controller
+### Parte3 Controller
 Essa API cria o pagamento de uma compra (```PlaceOrder```). Verifique o método ```PayOrder``` da classe ```OrderService```.
 Você deve ter percebido que existem diversas formas de pagamento (Pix, cartão de crédito, paypal), certo?
 Essa classe, no entanto, é problemática. Imagine que teríamos que incluir um novo método de pagamento, seria mais um ```if```na estrutura.
