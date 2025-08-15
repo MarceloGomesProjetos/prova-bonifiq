@@ -1,9 +1,7 @@
 ﻿namespace ProvaPub.Models
 {
-	public class CustomerList
+	// Replace 'PagedList<Customer>' with the correct generic type or remove type arguments if 'PagedList' is not generic
+	public class CustomerList : PagedList<Customer>
 	{
-		public List<Customer> Customers { get; set; }
-		public int TotalCount { get; set; }
-		public bool HasNext { get; set; }
 	}
 }

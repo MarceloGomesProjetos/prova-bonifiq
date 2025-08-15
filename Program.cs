@@ -13,8 +13,17 @@ builder.Services.AddSwaggerGen();
 
 // Troquei o AddSingleton por AddTransient para garantir que uma nova instância do serviço seja criada a cada requisição
 builder.Services.AddTransient<RandomService>();
+
+// Registrando os serviços de ProductService e CustomerService para Injeção de Dependência
+builder.Services.AddTransient<ProductService>();
+// Registrando o CustomerService para Injeção de Dependência
+builder.Services.AddTransient<CustomerService>();
+
+
 builder.Services.AddDbContext<TestDbContext>(options =>
 	options.UseSqlServer(builder.Configuration.GetConnectionString("ctx")));
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
