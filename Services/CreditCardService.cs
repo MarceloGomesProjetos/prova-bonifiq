@@ -17,7 +17,7 @@ public class CreditCardService : ICreditCardService
             };
         }
 
-        // Aqui você integraria com um gateway real (ex: Stripe, Cielo, etc.)
+        // Aqui integraria com um gateway real (ex: Stripe, Cielo, etc.)
         return new PaymentResult
         {
             IsSuccess = true,
