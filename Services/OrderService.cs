@@ -5,7 +5,8 @@ namespace ProvaPub.Services
 {
 	public class OrderService
 	{
-        TestDbContext _ctx;
+		// Injeção de dependência via construtor
+        private readonly TestDbContext _ctx;
 
         public OrderService(TestDbContext ctx)
         {

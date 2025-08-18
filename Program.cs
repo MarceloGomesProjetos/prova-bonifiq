@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
+using ProvaPub.Interfaces;
 using ProvaPub.Repository;
 using ProvaPub.Services;
+using ProvaPub.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +25,7 @@ builder.Services.AddTransient<CustomerService>();
 builder.Services.AddDbContext<TestDbContext>(options =>
 	options.UseSqlServer(builder.Configuration.GetConnectionString("ctx")));
 
+builder.Services.AddTransient<IDateTimeProvider, DateTimeProvider>();
 
 var app = builder.Build();
 
