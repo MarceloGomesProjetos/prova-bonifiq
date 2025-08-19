@@ -35,7 +35,6 @@ namespace ProvaPub.Tests
             var customerId = 999;
             
             // Mock do DbSet para o FindAsync.
-            // Para testar FindAsync, é preciso mockar o Find<T> diretamente no DbSet.
             var mockDbSet = new Mock<DbSet<Customer>>();
             mockDbSet.Setup(x => x.FindAsync(It.IsAny<object[]>(), It.IsAny<CancellationToken>()))
                      .ReturnsAsync((Customer)null);
@@ -153,16 +152,22 @@ namespace ProvaPub.Tests
             var customers = new List<Customer> { customer }.AsQueryable();
             var mockDbSet = new Mock<DbSet<Customer>>();
 
+            // Mock do DbSet e da lógica de consulta
             mockDbSet.As<IQueryable<Customer>>().Setup(m => m.Provider).Returns(customers.Provider);
             mockDbSet.As<IQueryable<Customer>>().Setup(m => m.Expression).Returns(customers.Expression);
             mockDbSet.As<IQueryable<Customer>>().Setup(m => m.ElementType).Returns(customers.ElementType);
             mockDbSet.As<IQueryable<Customer>>().Setup(m => m.GetEnumerator()).Returns(customers.GetEnumerator());
 
+            // Mock do Include
             mockDbSet.Setup(m => m.Include(It.IsAny<string>())).Returns(mockDbSet.Object);
 
+            // O mock do FirstOrDefaultAsync deve retornar o cliente correto.
             mockDbSet.Setup(m => m.FirstOrDefaultAsync(It.IsAny<Expression<Func<Customer, bool>>>(), It.IsAny<CancellationToken>()))
                      .ReturnsAsync((Expression<Func<Customer, bool>> predicate, CancellationToken token) =>
                          customers.FirstOrDefault(predicate.Compile()));
+
+            // O mock da contagem deve retornar o número de pedidos correto
+            mockDbSet.Setup(m => m.CountAsync(It.IsAny<CancellationToken>())).ReturnsAsync(customers.Count());
 
             _ctx.Setup(c => c.Customers).Returns(mockDbSet.Object);
 
